@@ -1,0 +1,111 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Informations personnelles{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+{% for flashMessage in app.session.flashbag.get('success') %}
+    <div class="alert alert-success">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+<div class="well">
+{{ form_start(visitorForm, { 'attr': {'class': 'form-horizontal'} }) }}
+    <div class="form-group">
+        {{ form_label(visitorForm.lastName, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-5 col-md-3">
+            {{ form_errors(visitorForm.lastName) }}
+            {{ form_widget(visitorForm.lastName, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(visitorForm.firstName, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-5 col-md-3">
+            {{ form_errors(visitorForm.firstName) }}
+            {{ form_widget(visitorForm.firstName, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(visitorForm.address, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-6 col-md-4">
+            {{ form_errors(visitorForm.address) }}
+            {{ form_widget(visitorForm.address, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(visitorForm.zipCode, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-2">
+            {{ form_errors(visitorForm.zipCode) }}
+            {{ form_widget(visitorForm.zipCode, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(visitorForm.city, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-5 col-md-3">
+            {{ form_errors(visitorForm.city) }}
+            {{ form_widget(visitorForm.city, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(visitorForm.hiringDate, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-5 col-md-3">
+            {{ form_errors(visitorForm.hiringDate) }}
+            {{ form_widget(visitorForm.hiringDate, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(visitorForm.username, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-2 col-md-3">
+            {{ form_errors(visitorForm.username) }}
+            {{ form_widget(visitorForm.username, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(visitorForm.password, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-5 col-md-3">
+            {{ form_errors(visitorForm.password) }}
+            {{ form_widget(visitorForm.password, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-md-offset-5 col-sm-3">
+            {{ form_row(visitorForm.save, { 'attr':  {
+                'class': 'btn btn-primary'
+            }}) }}
+        </div>
+    </div>
+{{ form_end(visitorForm) }}
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "layout.html.twig" %}
+{% set practitionerMenu = true %}
+
+{% block title %}Recherche de praticiens{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+<div class="well">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#simple" data-toggle="tab">Simple</a></li>
+                <li><a href="#advanced" data-toggle="tab">Avancée</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="simple">
+            <form class="form-horizontal" role="form" action="/practitioners/results/" method="post">
+                <div class="form-group">
+                    <label class="col-sm-3 col-sm-offset-2 control-label">Type</label>
+                    <div class="col-sm-5 col-md-4">
+                        <select class="form-control" name="type">
+                            {% for type in types %}
+                            <option value="{{ type.id }}">{{ type.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-3 col-sm-offset-5">
+                        <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="advanced">
+            <form class="form-horizontal" role="form" action="/practitioners/results/" method="post">
+                <div class="form-group">
+                    <label class="col-sm-3 col-sm-offset-2 control-label">Nom</label>
+                    <div class="col-sm-5 col-md-4">
+                        <input name="name" type="text" class="form-control" autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 col-sm-offset-2 control-label">Ville</label>
+                    <div class="col-sm-5 col-md-4">
+                        <input name="city" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-3 col-sm-offset-5">
+                        <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

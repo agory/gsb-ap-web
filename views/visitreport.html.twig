@@ -1,0 +1,68 @@
+{% extends "layout.html.twig" %}
+{% set visitReportMenu = true %}
+
+{% block title %}Nouveau rapport de visite{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+{% for flashMessage in app.session.flashbag.get('success') %}
+    <div class="alert alert-success">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+<div class="well">
+{{ form_start(visitReportForm, { 'attr': {'class': 'form-horizontal'} }) }}
+    <div class="form-group">
+        {{ form_label(visitReportForm.practitioner, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-6 col-md-4">
+            {{ form_errors(visitReportForm.practitioner) }}
+            {{ form_widget(visitReportForm.practitioner, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(visitReportForm.date, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-6 col-md-4">
+            {{ form_errors(visitReportForm.date) }}
+            {{ form_widget(visitReportForm.date, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(visitReportForm.purpose, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-6 col-md-4">
+            {{ form_errors(visitReportForm.purpose) }}
+            {{ form_widget(visitReportForm.purpose, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(visitReportForm.assessment, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+        }}) }}
+        <div class="col-sm-6 col-md-4">
+            {{ form_errors(visitReportForm.assessment) }}
+            {{ form_widget(visitReportForm.assessment, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-md-offset-5 col-sm-3">
+            {{ form_row(visitReportForm.save, { 'attr':  {
+                'class': 'btn btn-primary'
+            }}) }}
+        </div>
+    </div>
+{{ form_end(visitReportForm) }}
+</div>
+{% endblock %}
