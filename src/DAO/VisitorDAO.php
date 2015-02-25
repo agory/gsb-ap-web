@@ -41,6 +41,7 @@ class VisitorDAO extends DAO implements UserProviderInterface
             'visitor_zip_code' => $visitor->getZipCode(),
             'visitor_city' => $visitor->getCity(),
             'hiring_date' => $hiringDateString,
+            'visitor_type' => $visitor->getType(),
             'user_name' => $visitor->getUsername(),
             'password' => $visitor->getPassword(),
             );
@@ -108,6 +109,7 @@ class VisitorDAO extends DAO implements UserProviderInterface
         // Transform the DB date into a DateTime object
         $hiringDate = \DateTime::createFromFormat('Y-m-d', $row['hiring_date']);
         $visitor->setHiringDate($hiringDate);
+        $visitor->setType($row['visitor_type']);
         $visitor->setUsername($row['user_name']);
         $visitor->setPassword($row['password']);
         $visitor->setSalt($row['salt']);

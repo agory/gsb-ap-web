@@ -56,6 +56,13 @@ class Visitor implements UserInterface
     private $hiringDate;
 
     /**
+     * Visitor type (V, P, C, A or G)
+     *
+     * @var string
+     */
+    private $type;
+
+    /**
      * User name (used for authentication).
      *
      * @var string
@@ -211,6 +218,26 @@ class Visitor implements UserInterface
         return $this->hiringDate;
     }
 
+    /**
+     * Returns type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+    
+    /**
+     * Set type.
+     *
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+    
     /**
      * @inheritDoc
      */
