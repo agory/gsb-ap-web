@@ -43,12 +43,6 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.name' => 'GSB',
     'monolog.level' => $app['monolog.level']
 ));
-$app->register(new Silex\Provider\ServiceControllerServiceProvider());
-if (isset($app['debug']) && $app['debug']) {
-    $app->register(new Silex\Provider\WebProfilerServiceProvider(), array(
-        'profiler.cache_dir' => __DIR__.'/../var/cache/profiler'
-    ));
-}
 
 // Register services.
 $app['dao.family'] = $app->share(function ($app) {
@@ -75,21 +69,6 @@ $app['dao.visitreport'] = $app->share(function ($app) {
     $visitReportDAO->setPractitionerDAO($app['dao.practitioner']);
     $visitReportDAO->setVisitorDAO($app['dao.visitor']);
     return $visitReportDAO;
-});
-
-// Register error handler
-$app->error(function (\Exception $e, $code) use ($app) {
-    switch ($code) {
-        case 403:
-            $message = 'Access denied.';
-            break;
-        case 404:
-            $message = 'The requested resource could not be found.';
-            break;
-        default:
-            $message = "Something went wrong.";
-    }
-    return $app['twig']->render('error.html.twig', array('message' => $message));
 });
 
 // Register JSON data decoder for JSON requests
