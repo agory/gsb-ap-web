@@ -22,6 +22,7 @@
                     <td>{{ practitioner.firstName }}</td>
                     <td>{{ practitioner.city }}</td>
                     <td>{{ practitioner.type.name }}</td>
+                    <td><a class="btn btn-primary btn-xs" href="/practitioners/edit/{{ practitioner.id }}"><span class="glyphicon glyphicon-edit"></span></a></td>
                 </tr>
             {% endfor %}
         </table>

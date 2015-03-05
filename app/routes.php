@@ -32,6 +32,12 @@ $app->get('/practitioners/search/', "GSB\Controller\PractitionerController::prac
 // Results page for practitioners
 $app->post('/practitioners/results/', "GSB\Controller\PractitionerController::practitionerResultsAction");
 
+// add practitioners
+$app->match('/practitioners/add/', "GSB\Controller\PractitionerController::addPractitionerAction");
+
+// add practitioners
+$app->match('/practitioners/edit/{id}', "GSB\Controller\PractitionerController::editPractitionerAction");
+
 // Login form
 $app->get('/login', "GSB\Controller\HomeController::loginAction")->bind('login');  // named route so that path('login') works in Twig templates
 

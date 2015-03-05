@@ -4,8 +4,8 @@ namespace GSB\DAO;
 
 use GSB\Domain\Practitioner;
 
-class PractitionerDAO extends DAO
-{
+class PractitionerDAO extends DAO {
+
     /**
      * @var \GSB\DAO\PractitionerTypeDAO
      */
@@ -23,7 +23,7 @@ class PractitionerDAO extends DAO
     public function findAll() {
         $sql = "select * from practitioner order by practitioner_name, practitioner_first_name";
         $result = $this->getDb()->fetchAll($sql);
-        
+
         // Converts query result to an array of domain objects
         $practitioners = array();
         foreach ($result as $row) {
@@ -43,7 +43,7 @@ class PractitionerDAO extends DAO
     public function findAllByType($typeId) {
         $sql = "select * from practitioner where practitioner_type_id=? order by practitioner_name, practitioner_first_name";
         $result = $this->getDb()->fetchAll($sql, array($typeId));
-        
+
         // Convert query result to an array of domain objects
         $practitioners = array();
         foreach ($result as $row) {
@@ -66,7 +66,7 @@ class PractitionerDAO extends DAO
             order by practitioner_name, practitioner_first_name";
         // If $name and $city are undefined, the SQL query returns all names (%%) and all cities (%%)
         $result = $this->getDb()->fetchAll($sql, array('%' . $name . '%', '%' . $city . '%'));
-        
+
         // Convert query result to an array of domain objects
         $practitioners = array();
         foreach ($result as $row) {
@@ -94,6 +94,34 @@ class PractitionerDAO extends DAO
     }
 
     /**
+     * Saves a practitioner into the database.
+     *
+     * @param \GSB\Domain\practitioner $practitioner The visit report to save
+     */
+    public function save($practitioner) {
+        $practitionerData = array(
+            'practitioner_type_id' => $practitioner->getType()->getId(),
+            'practitioner_name' => $practitioner->getName(),
+            'practitioner_first_name' => $practitioner->getFirstName(),
+            'practitioner_address' => $practitioner->getAddress(),
+            'practitioner_city' => $practitioner->getCity(),
+            'practitioner_zip_code' => $practitioner->getZipCode(),
+            'notoriety_coefficient' => $practitioner->getNotorietyCoefficient(),
+        );
+
+        if ($practitioner->getId()) {
+            // The visit report has already been saved : update it
+            $this->getDb()->update('practitioner', $practitionerData, array('practitioner_id' => $practitioner->getId()));
+        } else {
+            // The visit report has never been saved : insert it
+            $this->getDb()->insert('practitioner', $practitionerData);
+            // Get the id of the newly created visit report and set it on the entity.
+            $id = $this->getDb()->lastInsertId();
+            $practitioner->setId($id);
+        }
+    }
+
+    /**
      * Creates a Practitioner instance from a DB query result row.
      *
      * @param array $row The DB query result row.
@@ -115,4 +143,5 @@ class PractitionerDAO extends DAO
         $practitioner->setType($type);
         return $practitioner;
     }
+
 }
