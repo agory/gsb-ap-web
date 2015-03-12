@@ -2,8 +2,8 @@
 
 namespace GSB\Domain;
 
-class Practitioner 
-{
+class Practitioner {
+
     /**
      * Practitioner id.
      *
@@ -59,6 +59,22 @@ class Practitioner
      * @var \GSB\Domaine\PractitionerType
      */
     private $type;
+
+    /**
+     * Type.
+     *
+     * @var array
+     */
+    private $lineSpecialites;
+
+    public function getLineSpecialites() {
+        return $this->lineSpecialites;
+    }
+
+    public function setLineSpecialites($lineSpecialites) {
+        $this->lineSpecialites = $lineSpecialites;
+        return $this;
+    }
 
     public function getId() {
         return $this->id;
@@ -125,6 +141,7 @@ class Practitioner
     }
 
     public function __toString() {
-        return $this->getFirstName() . ' ' . $this->getName() ;
+        return $this->getFirstName() . ' ' . $this->getName();
     }
+
 }

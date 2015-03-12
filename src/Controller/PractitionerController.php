@@ -17,6 +17,7 @@ class PractitionerController {
      */
     public function practitionerDetailsAction($id, Application $app) {
         $practitioner = $app['dao.practitioner']->find($id);
+        $practitioner->setLineSpecialites($app['dao.specialite']->findAllByPractitioner($practitioner));
         return $app['twig']->render('practitioner.html.twig', array('practitioner' => $practitioner));
     }
 
@@ -71,7 +72,7 @@ class PractitionerController {
         $practitioner = new Practitioner();
         $practitionerForm = $this->formCreate($request,$app,$practitioner,'Votre practicien a été ajouté.');
         $practitionerFormView = $practitionerForm->createView();
-        return $app['twig']->render('practitioner_form.html.twig', array(
+        return $app['twig']->render('practitioner_form_new.html.twig', array(
                     'practitionerForm' => $practitionerFormView,
                     'title' => 'Nouveau practicien'
         ));
@@ -84,7 +85,8 @@ class PractitionerController {
         $practitionerFormView = $practitionerForm->createView();
         return $app['twig']->render('practitioner_form.html.twig', array(
                     'practitionerForm' => $practitionerFormView,
-                    'title' => 'Edit practicien'
+                    'title' => 'Edit practicien',
+                    'formMenu' => 0
         ));
     }
     

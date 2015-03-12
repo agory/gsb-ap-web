@@ -1,42 +1,64 @@
 {% extends "layout.html.twig" %}
 {% set practitionerMenu = true %}
 
-{% block title %}{{ practitioner.firstName }} {{ practitioner.name }}{% endblock %}
+    {% block title %}{{ practitioner.firstName }} {{ practitioner.name }}{% endblock %}
 
-{% block content %}
-<h2 class="text-center">{{ block('title') }}</h2>
-<div class="well">
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Type</label>
-            <div class="col-sm-7">
-            <p class="form-control-static">{{ practitioner.type.name }}</p>
-            </div>
+    {% block content %}
+        <h2 class="text-center">{{ block('title') }}</h2>
+        <div class="well">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">Type</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">{{ practitioner.type.name }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">Adresse</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">{{ practitioner.address }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">Code postal</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">{{ practitioner.zipCode }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">Ville</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">{{ practitioner.city }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-5 control-label">Coefficient de notoriété</label>
+                    <div class="col-sm-7">
+                        <p class="form-control-static">{{ practitioner.notorietyCoefficient }}</p>
+                    </div>
+                </div>
+                <h3>Les spécialités</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td>Nom</td>
+                            <td>Diplôme</td>
+                            <td>Notation</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for lineSpecialite in practitioner.lineSpecialites %}
+                        <tr>
+                            <td>{{lineSpecialite.specialite.name}}</td>
+                            <td>{{lineSpecialite.graduate}}</td>
+                            <td>{{lineSpecialite.prescriptionCoefficient}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+
+
+            </form>
         </div>
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Adresse</label>
-            <div class="col-sm-7">
-                <p class="form-control-static">{{ practitioner.address }}</p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Code postal</label>
-            <div class="col-sm-7">
-                <p class="form-control-static">{{ practitioner.zipCode }}</p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Ville</label>
-            <div class="col-sm-7">
-                <p class="form-control-static">{{ practitioner.city }}</p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Coefficient de notoriété</label>
-            <div class="col-sm-7">
-                <p class="form-control-static">{{ practitioner.notorietyCoefficient }}</p>
-            </div>
-        </div>
-    </form>
-</div>
-{% endblock %}
+    {% endblock %}

@@ -1,0 +1,104 @@
+{% extends "layout.html.twig" %}
+{% set practitionerMenu = true %}
+
+    {% block title %}{{title}}{% endblock %}
+
+    {% block content %}
+
+        <div class="well">
+            {{ form_start(practitionerForm, { 'attr': {'class': 'form-horizontal'} }) }}
+            <div class="form-group">
+                {{ form_label(practitionerForm.name, 'Nom', { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(practitionerForm.name) }}
+                    {{ form_widget(practitionerForm.name, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(practitionerForm.firstName, 'Prénom', { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(practitionerForm.firstName) }}
+                    {{ form_widget(practitionerForm.firstName, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(practitionerForm.address, 'Adresse', { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(practitionerForm.address) }}
+                    {{ form_widget(practitionerForm.address, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(practitionerForm.city, 'Ville', { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(practitionerForm.city) }}
+                    {{ form_widget(practitionerForm.city, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(practitionerForm.zipCode, 'Code postal', { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(practitionerForm.zipCode) }}
+                    {{ form_widget(practitionerForm.zipCode, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(practitionerForm.notorietyCoefficient, 'Coefficient de notoriété ', { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(practitionerForm.notorietyCoefficient) }}
+                    {{ form_widget(practitionerForm.notorietyCoefficient, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>  
+
+            <div class="form-group">
+                {{ form_label(practitionerForm.type, NULL, { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(practitionerForm.type) }}
+                    {{ form_widget(practitionerForm.type, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-md-offset-5 col-sm-3">
+                    {{ form_row(practitionerForm.save, { 'attr':  {
+                'class': 'btn btn-primary'
+                    }}) }}
+                </div>
+            </div>
+
+            {{ form_end(practitionerForm) }}
+        </div>
+                
+    {% endblock %}
