@@ -74,6 +74,11 @@ $app['dao.activity'] = $app->share(function ($app) {
     return new GSB\DAO\ActivityDAO($app['db']);
 });
 
+$app['dao.specialite'] = $app->share(function ($app) {
+    $specialiteDAO = new GSB\DAO\SpecialiteDAO($app['db']);
+    return $specialiteDAO;
+});
+
 // Register JSON data decoder for JSON requests
 $app->before(function (Request $request) {
     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
