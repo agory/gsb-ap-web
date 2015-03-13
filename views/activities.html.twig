@@ -1,0 +1,34 @@
+{% extends "layout.html.twig" %}
+{% set activityMenu = true %}
+
+{% block title %}Activités{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+{% if activities %}
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th></th> <!-- Action -->
+                    <th>Date</th>
+                    <th>Lieu</th>
+                    <th>Thème</th>
+                    <th>Raison</th>
+                </tr>
+            </thead>
+            {% for activity in activities %}
+                <tr>
+                    <td><a href="/activities/edit/{{ activity.id }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td><a href="/activities/{{ activity.id }}">{{ activity.date | date('d / m / Y') }}</a></td>
+                    <td>{{ activity.place }}</td>
+                    <td>{{ activity.theme }}</td>
+                    <td>{{ activity.purpose }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-warning">Aucune activitée trouvée.</div>
+{% endif %}   
+{% endblock %}

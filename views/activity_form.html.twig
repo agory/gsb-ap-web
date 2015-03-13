@@ -1,0 +1,73 @@
+{% extends "layout.html.twig" %}
+{% set activityMenu = true %}
+
+    {% block title %}{{title}}{% endblock %}
+
+    {% block content %}
+        <h2 class="text-center">{{ block('title') }}</h2>
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        <div class="well">
+            {{ form_start(activityForm, { 'attr': {'class': 'form-horizontal'} }) }}
+            <div class="form-group">
+                {{ form_label(activityForm.date, 'Date', { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(activityForm.date) }}
+                    {{ form_widget(activityForm.date, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(activityForm.place, 'Lieu', { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(activityForm.place) }}
+                    {{ form_widget(activityForm.place, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(activityForm.theme, 'Thème', { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(activityForm.theme) }}
+                    {{ form_widget(activityForm.theme, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(activityForm.purpose, 'Raison', { 'label_attr':  {
+            'class': 'col-sm-4 col-md-5 control-label'
+                }}) }}
+                <div class="col-sm-6 col-md-4">
+                    {{ form_errors(activityForm.purpose) }}
+                    {{ form_widget(activityForm.purpose, { 'attr':  {
+                'class': 'form-control'
+                    }}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-md-offset-5 col-sm-3">
+                    {{ form_row(activityForm.save, { 'attr':  {
+                'class': 'btn btn-primary'
+                }}) }}
+                </div>
+            </div>
+
+            {{ form_end(activityForm) }}
+        </div>
+    {% endblock %}

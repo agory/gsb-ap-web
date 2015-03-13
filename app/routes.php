@@ -4,6 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 use GSB\Domain\VisitReport;
 use GSB\Form\Type\VisitorType;
 use GSB\Form\Type\VisitReportType;
+use GSB\Form\Type\ActivityType;
 
 // Home page
 $app->get('/', "GSB\Controller\HomeController::indexAction");
@@ -49,3 +50,23 @@ $app->get('/reports/', "GSB\Controller\VisitReportController::visitReportsAction
 
 // New visit report
 $app->match('/reports/add/', "GSB\Controller\VisitReportController::addVisitReportAction");
+
+
+/* * * * * * * * * * *
+* 
+* COMMERCIAL - Pierre
+* 
+* * * * * * * * * * */
+
+// List of all activities
+$app->get('/activities/', "GSB\Controller\ActivityController::activitiesAction");
+
+// Details for a activite
+$app->get('/activities/{id}', "GSB\Controller\ActivityController::activityDetailsAction");
+
+// Add activities
+$app->match('/activities/add/', "GSB\Controller\ActivityController::addActivityAction");
+
+// Edit activities
+$app->match('/activities/edit/{id}', "GSB\Controller\ActivityController::editActivityAction");
+

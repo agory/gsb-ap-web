@@ -1,0 +1,36 @@
+{% extends "layout.html.twig" %}
+{% set activityMenu = true %}
+
+{% block title %}{{ activity.theme }}{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+<div class="well">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Date</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{ activity.date | date('d / m / Y') }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Lieu</label>
+            <div class="col-sm-9">
+            <p class="form-control-static">{{ activity.place }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Thème</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{ activity.theme }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Raison</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{ activity.purpose }}</p>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

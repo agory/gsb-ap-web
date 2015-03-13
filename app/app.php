@@ -70,6 +70,9 @@ $app['dao.visitreport'] = $app->share(function ($app) {
     $visitReportDAO->setVisitorDAO($app['dao.visitor']);
     return $visitReportDAO;
 });
+$app['dao.activity'] = $app->share(function ($app) {
+    return new GSB\DAO\ActivityDAO($app['db']);
+});
 
 // Register JSON data decoder for JSON requests
 $app->before(function (Request $request) {
