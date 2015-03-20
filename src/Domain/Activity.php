@@ -45,7 +45,8 @@ class Activity
     }
 
     public function getDate() {
-        return new \DateTime($this->date);
+        
+        return $this->date;
     }
 
     public function getPlace() {
@@ -63,9 +64,15 @@ class Activity
     public function setId($id) {
         $this->id = $id;
     }
-
+    
+    // Transforme le paramètre en DateTime s'il s'agit d'un string,
+    // sinon il renvoit date
     public function setDate($date) {
-        $this->date = $date;
+        if(is_string($date))
+            $this->date = new \DateTime($date);
+        else
+            $this->date = $date;
+        
     }
 
     public function setPlace($place) {
