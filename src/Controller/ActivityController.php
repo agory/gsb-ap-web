@@ -6,6 +6,7 @@ use GSB\Domain\Activity;
 use GSB\Form\Type\ActivityType;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ActivityController {
 
@@ -44,6 +45,7 @@ class ActivityController {
         if ($activityForm->isValid()) {
             $app['dao.activity']->save($activity);
             $app['session']->getFlashBag()->add('success', 'Votre activité a été ajouté.');
+            return new RedirectResponse($request->getBaseUrl().'/activities');
         }
         return $app['twig']->render('activity_form.html.twig', array(
                     'title' => 'Nouvelle activitée',
@@ -65,6 +67,7 @@ class ActivityController {
         if ($activityForm->isValid()) {
             $app['dao.activity']->save($activity);
             $app['session']->getFlashBag()->add('success', 'Votre activité a été mis à jour.');
+            return new RedirectResponse($request->getBaseUrl().'/activities/'.$id);
         }
         return $app['twig']->render('activity_form.html.twig', array(
                     'title' => 'Modifier une activitée',

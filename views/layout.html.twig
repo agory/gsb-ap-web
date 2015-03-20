@@ -1,118 +1,128 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ app.request.basepath }}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ app.request.basepath }}/css/gsb-report.css" rel="stylesheet">
-    <title>GSB - {% block title %}{% endblock %}</title>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">GSB</a>
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse-target">
-                    <ul class="nav navbar-nav">
-                        {% if app.security.token and is_granted('IS_AUTHENTICATED_FULLY') %}
-                            {% if app.security.token.user.type == 'V' %}
-                                <li class="dropdown {% if expenseMenu is defined %}active{% endif %}">
-                                    <a href="/expenses/">Frais</a>
-                                </li>
-                                <li class="dropdown {% if invitationMenu is defined %}active{% endif %}">
-                                    <a href="/invitations/">Invitations</a>
-                                </li>
-                                <li class="dropdown {% if visitReportMenu is defined %}active{% endif %}">
-                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Rapports de visite <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="/reports/">Consulter</a></li>
-                                        <li><a href="/reports/add/">Ajouter</a></li>
-                                    </ul>
-                                </li>
-                            {% elseif app.security.token.user.type == 'P' %}
-                                <li class="dropdown {% if interactionMenu is defined %}active{% endif %}">
-                                    <a href="/interactions/">Interactions</a>
-                                </li>
-                                <li class="dropdown {% if componentMenu is defined %}active{% endif %}">
-                                    <a href="/components/">Composants</a>
-                                </li>
-                                <li class="dropdown {% if prescriptionMenu is defined %}active{% endif %}">
-                                    <a href="/prescriptions/">Prescriptions</a>
-                                </li>
-                                <li class="dropdown {% if drugMenu is defined %}active{% endif %}">
-                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Médicaments <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="/drugs/">Consulter</a></li>
-                                        <li><a href="/drugs/search/">Rechercher</a></li>
-                                    </ul>
-                                </li>
-                            {% elseif app.security.token.user.type == 'C' %}
-                                <li class="dropdown {% if districtMenu is defined %}active{% endif %}">
-                                    <a href="/districts/">Régions</a>
-                                </li>
-                                <li class="dropdown {% if activityMenu is defined %}active{% endif %}">
-                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Activités complémentaires <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="/activities/">Consulter</a></li>
-                                        <li><a href="/activities/add/">Ajouter</a></li>
-                                        <li><a href="/activities/invite/">Inviter un praticien</a></li>
-                                    </ul>
-                                </li>
-                            {% elseif app.security.token.user.type == 'A' %}
-                                <li class="dropdown {% if practitionerMenu is defined %}active{% endif %}">
-                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Praticiens <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="/practitioners/">Consulter</a></li>
-                                        <li><a href="/practitioners/search/">Rechercher</a></li>
-                                        <li><a href="/practitioners/add/">Ajouter</a></li>
-                                    </ul>
-                                </li>
-                            {% elseif app.security.token.user.type == 'G' %}
-                                <li class="dropdown {% if districtMenu is defined %}active{% endif %}">
-                                    <a href="/expenses/validation/">Validation des frais</a>
-                                </li>
-                                
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ app.request.basepath }}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ app.request.basepath }}/css/gsb-report.css" rel="stylesheet">
+        <title>GSB - {% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">GSB</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-collapse-target">
+                        <ul class="nav navbar-nav">
+                            {% if app.security.token and is_granted('IS_AUTHENTICATED_FULLY') %}
+                                {% if app.security.token.user.type == 'V' %}
+                                    <li class="dropdown {% if expenseMenu is defined %}active{% endif %}">
+                                        <a href="/expenses/">Frais</a>
+                                    </li>
+                                    <li class="dropdown {% if invitationMenu is defined %}active{% endif %}">
+                                        <a href="/invitations/">Invitations</a>
+                                    </li>
+                                    <li class="dropdown {% if visitReportMenu is defined %}active{% endif %}">
+                                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Rapports de visite <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/reports/">Consulter</a></li>
+                                            <li><a href="/reports/add/">Ajouter</a></li>
+                                        </ul>
+                                    </li>
+                                {% elseif app.security.token.user.type == 'P' %}
+                                    <li class="dropdown {% if interactionMenu is defined %}active{% endif %}">
+                                        <a href="/interactions/">Interactions</a>
+                                    </li>
+                                    <li class="dropdown {% if componentMenu is defined %}active{% endif %}">
+                                        <a href="/components/">Composants</a>
+                                    </li>
+                                    <li class="dropdown {% if prescriptionMenu is defined %}active{% endif %}">
+                                        <a href="/prescriptions/">Prescriptions</a>
+                                    </li>
+                                    <li class="dropdown {% if drugMenu is defined %}active{% endif %}">
+                                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Médicaments <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/drugs/">Consulter</a></li>
+                                            <li><a href="/drugs/search/">Rechercher</a></li>
+                                        </ul>
+                                    </li>
+                                {% elseif app.security.token.user.type == 'C' %}
+                                    <li class="dropdown {% if districtMenu is defined %}active{% endif %}">
+                                        <a href="/districts/">Régions</a>
+                                    </li>
+                                    <li class="dropdown {% if activityMenu is defined %}active{% endif %}">
+                                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Activités complémentaires <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/activities/">Consulter</a></li>
+                                            <li><a href="/activities/add/">Ajouter</a></li>
+                                            <li><a href="/activities/invite/">Inviter un praticien</a></li>
+                                        </ul>
+                                    </li>
+                                {% elseif app.security.token.user.type == 'A' %}
+                                    <li class="dropdown {% if practitionerMenu is defined %}active{% endif %}">
+                                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Praticiens <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/practitioners/">Consulter</a></li>
+                                            <li><a href="/practitioners/search/">Rechercher</a></li>
+                                            <li><a href="/practitioners/add/">Ajouter</a></li>
+                                        </ul>
+                                    </li>
+                                {% elseif app.security.token.user.type == 'G' %}
+                                    <li class="dropdown {% if districtMenu is defined %}active{% endif %}">
+                                        <a href="/expenses/validation/">Validation des frais</a>
+                                    </li>
+
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if app.security.token and is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-user"></span> Bienvenue, {{ app.security.token.user.username }} <b class="caret"></b></a>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if app.security.token and is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="glyphicon glyphicon-user"></span> Bienvenue, {{ app.security.token.user.username }} <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="/me">Profil</a></li>
                                         <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
                                     </ul>
                                 </li>
-                                {% else %}
+                            {% else %}
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <span class="glyphicon glyphicon-user"></span> Non connecté <b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="{{ path('login') }}">Se connecter</a></li>
-                                        </ul>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div><!-- /.container -->
-                </nav>
-                {% autoescape %}
-                    <div id="content">{% block content %}{% endblock %}</div>
-                {% endautoescape %}
-            </div>
-            <!-- jQuery -->
-            <script src="{{ app.request.basepath }}/lib/jquery/jquery-1.11.1.min.js"></script>
-            <!-- JavaScript Boostrap plugin -->
-            <script src="{{ app.request.basepath }}/lib/bootstrap/js/bootstrap.min.js"></script>
-        </body>
-        </html>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('login') }}">Se connecter</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div><!-- /.container -->
+            </nav>
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="alert alert-danger">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% autoescape %}
+                <div id="content">{% block content %}{% endblock %}</div>
+            {% endautoescape %}
+        </div>
+        <!-- jQuery -->
+        <script src="{{ app.request.basepath }}/lib/jquery/jquery-1.11.1.min.js"></script>
+        <!-- JavaScript Boostrap plugin -->
+        <script src="{{ app.request.basepath }}/lib/bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>
