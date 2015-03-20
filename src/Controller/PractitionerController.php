@@ -70,7 +70,7 @@ class PractitionerController {
     public function addPractitionerAction(Request $request, Application $app) {
         $practitionerFormView = NULL;
         $practitioner = new Practitioner();
-        $practitionerForm = $this->formCreate($request,$app,$practitioner,'Votre practicien a été ajouté.');
+        $practitionerForm = $this->formCreate($request, $app, $practitioner, 'Votre practicien a été ajouté.');
         $practitionerFormView = $practitionerForm->createView();
         return $app['twig']->render('practitioner_form_new.html.twig', array(
                     'practitionerForm' => $practitionerFormView,
@@ -81,16 +81,17 @@ class PractitionerController {
     public function editPractitionerAction($id, Request $request, Application $app) {
         $practitionerFormView = NULL;
         $practitioner = $app['dao.practitioner']->find($id);
-        $practitionerForm = $this->formCreate($request,$app,$practitioner,'Votre practicien a été ajouté.');
+        $practitionerForm = $this->formCreate($request, $app, $practitioner, 'Votre practicien a été ajouté.');
         $practitionerFormView = $practitionerForm->createView();
         return $app['twig']->render('practitioner_form.html.twig', array(
                     'practitionerForm' => $practitionerFormView,
+                    'practitioner' => $practitioner,
                     'title' => 'Edit practicien',
                     'formMenu' => 0
         ));
     }
-    
-    private function formCreate(Request $request,Application $app,Practitioner $practitioner, $msg){
+
+    private function formCreate(Request $request, Application $app, Practitioner $practitioner, $msg) {
         $types = $app['dao.practitionertype']->findAll();
         $practitionerForm = $app['form.factory']->create(new PractitionerType($types), $practitioner);
         $practitionerForm->handleRequest($request);
@@ -103,6 +104,24 @@ class PractitionerController {
             $app['session']->getFlashBag()->add('success', $msg);
         }
         return $practitionerForm;
+    }
+
+    public function gestSpePractitionerAction($id, Request $request, Application $app) {
+        $practitioner = $app['dao.practitioner']->find($id);
+        $practitioner->setLineSpecialites($app['dao.specialite']->findAllByPractitioner($practitioner));
+        
+        $spes = $app['dao.specialite']->findAll();
+        $practitionerForm = $app['form.factory']->create(new PractitionerSpeType($spes));
+        $practitionerForm->handleRequest($request);
+        if ($practitionerForm->isValid()) {
+            // Manually affect practitioner to the new visit report
+            $typeId = $practitionerForm->get('type')->getData();
+            $type = $app['dao.practitionertype']->find($typeId);
+            $practitioner->setType($type);
+            $app['dao.practitioner']->save($practitioner);
+            $app['session']->getFlashBag()->add('success', $msg);
+        }
+        return $app['twig']->render('practitioner_form.html.twig', array('practitioner' => $practitioner,'formMenu'=>1));
     }
 
 }

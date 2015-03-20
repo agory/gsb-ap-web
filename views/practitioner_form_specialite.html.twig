@@ -1,10 +1,26 @@
-{% extends "layout.html.twig" %}
 {% set practitionerMenu = true %}
 
-    {% block title %}{{title}}{% endblock %}
-
-    {% block content %}
-
+{% block content %}
+        <h3 class="text-center">Les spécialités</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>Nom</td>
+                    <td>Diplôme</td>
+                    <td>Notation</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lineSpecialite in practitioner.lineSpecialites %}
+                    <tr>
+                        <td>{{lineSpecialite.specialite.name}}</td>
+                        <td>{{lineSpecialite.graduate}}</td>
+                        <td>{{lineSpecialite.prescriptionCoefficient}}</td>
+                        <td><a class="btn btn-danger" href="/practitioners/edit/{{ practitioner.id }}/Spe/{{lineSpecialite.specialite.id}}/del">X</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         
-                
-    {% endblock %}
+
+{% endblock %}

@@ -18,12 +18,12 @@ class SpecialiteDAO extends DAO {
         $result = $this->getDb()->fetchAll($sql);
 
         // Converts query result to an array of domain objects
-        $practitionerTypes = array();
+        $specialite = array();
         foreach ($result as $row) {
-            $practitionerTypeId = $row['practitioner_type_id'];
-            $practitionerTypes[$practitionerTypeId] = $this->buildDomainObject($row);
+            $specialityId = $row['speciality_id'];
+            $specialite[$specialityId] = $this->buildDomainObject($row);
         }
-        return $practitionerTypes;
+        return $specialite;
     }
 
     /**

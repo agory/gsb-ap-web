@@ -1,22 +1,23 @@
 {% extends "layout.html.twig" %}
 {% set practitionerMenu = true %}
 
-    {% block title %}Edit {% endblock %}
+{% block title %}Edit {% endblock %}
 
-    {% block content %}
-        
-        <div role="tabpanel">
-            <div class="col-sm-6 col-sm-offset-3 tab-position" >
-                <ul class="nav nav-tabs nav-justified" role="tablist">
-                    <li role="presentation" class="{% if formMenu == 0 %}active{% endif %}">
-                        <a href="/user">Profil</a>
-                    </li>
-                    <li role="presentation" class="{% if formMenu == 1 %}active{% endif %}">
-                        <a href="/user/password" >Spécialité</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-content ">
+{% block content %}
+
+    <div role="tabpanel">
+        <div class="col-sm-6 col-sm-offset-3 tab-position" >
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li role="presentation" class="{% if formMenu == 0 %}active{% endif %}">
+                    <a href="/practitioners/edit/{{ practitioner.id }}">Profil</a>
+                </li>
+                <li role="presentation" class="{% if formMenu == 1 %}active{% endif %}">
+                    <a href="/practitioners/edit/{{ practitioner.id }}/spe" >Spécialité</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content col-xs-12 ">
+            <div class="well">
                 <div role="tabpanel" class="tab-pane {% if formMenu == 0 %}active{% endif %} " >
                     {% if formMenu == 0 %}
                         {% include 'practitioner_form_profile.html.twig' %}
@@ -29,4 +30,6 @@
                 </div>
             </div>
         </div>
-    {% endblock %}
+    </div>
+
+{% endblock %}
