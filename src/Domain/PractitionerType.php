@@ -2,8 +2,8 @@
 
 namespace GSB\Domain;
 
-class PractitionerType 
-{
+class PractitionerType implements \JsonSerializable {
+
     /**
      * PractitionerType id.
      *
@@ -48,8 +48,13 @@ class PractitionerType
     public function setPlace($place) {
         $this->place = $place;
     }
-    
+
     public function __toString() {
-        return $this->getName() ;
+        return $this->getName();
     }
+
+    public function jsonSerialize() {
+        return get_object_vars($this);
+    }
+
 }

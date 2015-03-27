@@ -1,0 +1,143 @@
+.todo {
+    height: 180px;
+    background-color: #ffff9c;
+    margin: 5px;
+    position: relative;
+    padding: 0px;
+    padding-bottom: 21px;
+    padding-top: 30px;
+}
+.todo-head{
+    position: absolute;
+    top:0px;
+    right: 0px;
+    left:0px;
+    background-color: grey;
+    color: white;
+    height: 30px;
+}
+.todo-foot{
+    color: grey;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left:0px;
+    height: 20px;
+    text-align: center;
+    border-top: 1px solid grey;
+}
+
+.todo input{
+    color: inherit;
+    background-color: inherit;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+.todo-head > .check,
+.todo-head > .title,
+.todo-head > .del,
+.todo-head > .title-new {
+    top:0px;
+    position: absolute;
+    vertical-align: bottom;
+    height: 30px;
+    margin: 0px;
+}
+.todo-head > .check{
+    left: 0px;
+    right: 90%;
+}
+.todo-head > .title{
+    right: 15%;
+    left: 10%;
+}
+.todo-head > .title-new{
+    right: 15%;
+    left: 10%;
+}
+.todo-head > .title > input{
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+.todo-head > .title-new > input{
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+.todo-head > .del{
+    right: 0px;
+    left: 75%px;
+    background-color: red;
+    text-align: center;
+    padding: 5px;
+}
+
+.todo textarea{
+    color: inherit;
+    background-color: inherit;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+.todo-content{
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    .navbar-collapse {
+        height: auto;
+        border-top: 0;
+        box-shadow: none;
+        max-height: none;
+        padding-left:0;
+        padding-right:0;
+    }
+    .navbar-collapse.collapse {
+        display: block !important;
+        width: auto !important;
+        padding-bottom: 0;
+        overflow: visible !important;
+    }
+    .navbar-collapse.in {
+        overflow-x: visible;
+    }
+
+    .navbar
+    {
+        max-width:300px;
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: 0px;
+    }	
+
+    .navbar-nav,
+    .navbar-nav > li,
+    .navbar-left,
+    .navbar-right,
+    .navbar-header
+    {float:none !important;}
+
+    .navbar-right .dropdown-menu {left:0;right:auto;}
+    .navbar-collapse .navbar-nav.navbar-right:last-child {
+        margin-right: 0;
+    }
+
+    .navbar-fixed-left{
+        position: absolute;
+        left:0px;
+        top:0px;
+        bottom: 0px;
+    }
+    body{
+        padding-left: 190px;
+    }
+
+}

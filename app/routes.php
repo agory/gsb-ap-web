@@ -73,3 +73,16 @@ $app->match('/activities/add/', "GSB\Controller\ActivityController::addActivityA
 // Edit activities
 $app->match('/activities/edit/{id}', "GSB\Controller\ActivityController::editActivityAction");
 
+
+/* * * * * * * * * * *
+* 
+* Web Service - Alexandre
+* 
+* * * * * * * * * * */
+
+// Details for a practitioner
+$app->get('/json/practitioners/{id}', "GSB\Controller\JsonController::practitionerAction");
+
+// List of all practitioners
+$app->get('/json/practitioners/all/', "GSB\Controller\JsonController::practitionersAction");
+

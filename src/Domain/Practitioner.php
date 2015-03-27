@@ -2,7 +2,7 @@
 
 namespace GSB\Domain;
 
-class Practitioner {
+class Practitioner implements \JsonSerializable {
 
     /**
      * Practitioner id.
@@ -142,6 +142,10 @@ class Practitioner {
 
     public function __toString() {
         return $this->getFirstName() . ' ' . $this->getName();
+    }
+
+    public function jsonSerialize() {
+        return get_object_vars($this);
     }
 
 }
