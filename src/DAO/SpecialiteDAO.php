@@ -72,13 +72,12 @@ class SpecialiteDAO extends DAO {
         $practitionerId = $lineSpecialite->getPractitioner()->getId();
         $specialiteId = $lineSpecialite->getSpecialite()->getId();
         $sql = "select * "
-                . " from speciality sp join owning ow"
-                . " on sp.speciality_id = ow.speciality_id"
+                . " from owning "
                 . " where practitioner_id=? and speciality_id=?";
         $result = $this->getDb()->fetchAll($sql, array($practitionerId, $specialiteId));
 
         // Converts query result to an array of domain objects
-        if ($row)
+        if ($result)
             return TRUE;
         else
             return FALSE;
@@ -99,6 +98,7 @@ class SpecialiteDAO extends DAO {
             $lineSpecialiteData['speciality_id'] = $specialiteId;
             $this->getDb()->insert('owning', $lineSpecialiteData);
         }
+        return $exist;
     }
 
     /**
@@ -106,10 +106,7 @@ class SpecialiteDAO extends DAO {
      *
      * @param \AgnamStore\Domain\LineSpecialite $lineSpecialite The ItemCart to remove
      */
-    public function deleteLineSpecialite(LineSpecialite $lineSpecialite) {
-        $practitionerId = $lineSpecialite->getPractitioner()->getId();
-        $specialiteId = $lineSpecialite->getSpecialite()->getId();
-            // Delete the LineSpecialite
+    public function deleteLineSpecialite($practitionerId,$specialiteId) {
         $this->getDb()->delete('owning', array('practitioner_id' => $practitionerId, 'speciality_id' => $specialiteId));
     }
 

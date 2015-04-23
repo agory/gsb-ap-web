@@ -6,6 +6,9 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use GSB\Domain\Practitioner;
 use GSB\Form\Type\PractitionerType;
+use GSB\Form\Type\PractitionerSpeType;
+use GSB\Domain\LineSpecialite;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PractitionerController {
 
@@ -105,23 +108,37 @@ class PractitionerController {
         }
         return $practitionerForm;
     }
+    public function delSpePractitionerAction($idPractitioner,$idSpecialite, Request $request, Application $app) {
+        $app['dao.specialite']->deleteLineSpecialite($idPractitioner,$idSpecialite);
+        return new RedirectResponse('/practitioners/edit/'.$idPractitioner.'/spe');
+    }
 
     public function gestSpePractitionerAction($id, Request $request, Application $app) {
         $practitioner = $app['dao.practitioner']->find($id);
-        $practitioner->setLineSpecialites($app['dao.specialite']->findAllByPractitioner($practitioner));
-        
         $spes = $app['dao.specialite']->findAll();
-        $practitionerForm = $app['form.factory']->create(new PractitionerSpeType($spes));
+        $spe = new LineSpecialite();
+        $practitionerForm = $app['form.factory']->create(new PractitionerSpeType($spes), $spe);
         $practitionerForm->handleRequest($request);
         if ($practitionerForm->isValid()) {
             // Manually affect practitioner to the new visit report
-            $typeId = $practitionerForm->get('type')->getData();
-            $type = $app['dao.practitionertype']->find($typeId);
-            $practitioner->setType($type);
-            $app['dao.practitioner']->save($practitioner);
+            $speId = $practitionerForm->get('spe')->getData();
+            $spe->setSpecialite($app['dao.specialite']->find($speId));
+            $spe->setPractitioner($practitioner);
+            if ($app['dao.specialite']->saveLineSpecialite($spe)) {
+                $msg = 'La spécialité a été mise à jour';
+            } else {
+                $msg = 'La spécialité a bien été ajouté.';
+            }
             $app['session']->getFlashBag()->add('success', $msg);
         }
-        return $app['twig']->render('practitioner_form.html.twig', array('practitioner' => $practitioner,'formMenu'=>1));
+        $practitioner->setLineSpecialites($app['dao.specialite']->findAllByPractitioner($practitioner));
+        $practitionerFormView = $practitionerForm->createView();
+        return $app['twig']->render('practitioner_form.html.twig', array(
+                    'practitioner' => $practitioner,
+                    'formMenu' => 1,
+                    'title' => 'Edit practicien',
+                    'practitionerForm' => $practitionerFormView,
+        ));
     }
 
 }

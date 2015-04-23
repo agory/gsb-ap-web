@@ -20,6 +20,8 @@ class PractitionerSpeType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
+                ->add('graduate', 'text', array('required' => TRUE))
+                ->add('prescriptionCoefficient', 'number', array('required' => TRUE))
                 ->add('spe', 'choice', array(
                     'label' => "Spécialité",
                     'choices' => $this->spe,
@@ -33,7 +35,7 @@ class PractitionerSpeType extends AbstractType {
     }
 
     public function getName() {
-        return 'practitioner';
+        return 'LineSpecialite';
     }
 
 }

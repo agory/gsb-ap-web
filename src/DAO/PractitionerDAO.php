@@ -120,6 +120,18 @@ class PractitionerDAO extends DAO {
             $practitioner->setId($id);
         }
     }
+    public function convertJsonObject($data){
+        $practitioner = new Practitioner();
+        $practitioner->setId($data['id']);
+        $practitioner->setName($data['name']);
+        $practitioner->setFirstName($data['firstName']);
+        $practitioner->setAddress($data['address']);
+        $practitioner->setZipCode($data['zipCode']);
+        $practitioner->setCity($data['city']);
+        $practitioner->setNotorietyCoefficient($data['notorietyCoefficient']);
+        $practitioner->setType($this->practitionerTypeDAO->find($data['type']['id']));
+        return $practitioner;
+    }
 
     /**
      * Creates a Practitioner instance from a DB query result row.

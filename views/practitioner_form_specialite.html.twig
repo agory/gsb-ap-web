@@ -1,26 +1,55 @@
 {% set practitionerMenu = true %}
 
 {% block content %}
-        <h3 class="text-center">Les spécialités</h3>
-        <table class="table table-hover">
-            <thead>
+    <h3 class="text-center">Les spécialités</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>Nom</td>
+                <td>Diplôme</td>
+                <td>Notation</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lineSpecialite in practitioner.lineSpecialites %}
                 <tr>
-                    <td>Nom</td>
-                    <td>Diplôme</td>
-                    <td>Notation</td>
+                    <td>{{lineSpecialite.specialite.name}}</td>
+                    <td>{{lineSpecialite.graduate}}</td>
+                    <td>{{lineSpecialite.prescriptionCoefficient}}</td>
+                    <td><a class="btn btn-danger" href="/practitioners/edit/{{ practitioner.id }}/spe/{{lineSpecialite.specialite.id}}/del">X</a></td>
                 </tr>
-            </thead>
-            <tbody>
-                {% for lineSpecialite in practitioner.lineSpecialites %}
-                    <tr>
-                        <td>{{lineSpecialite.specialite.name}}</td>
-                        <td>{{lineSpecialite.graduate}}</td>
-                        <td>{{lineSpecialite.prescriptionCoefficient}}</td>
-                        <td><a class="btn btn-danger" href="/practitioners/edit/{{ practitioner.id }}/Spe/{{lineSpecialite.specialite.id}}/del">X</a></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            {{ form_start(practitionerForm, { 'attr': {'class': 'form-horizontal'} }) }}
+            <tr>
+                <td>
+                    {{ form_errors(practitionerForm.spe) }}
+                    {{ form_widget(practitionerForm.spe, { 'attr':  {
+                        'class': 'form-control'
+                    }}) }}
+                </td>
+                <td>
+                    {{ form_errors(practitionerForm.graduate) }}
+                    {{ form_widget(practitionerForm.graduate, { 'attr':  {
+                        'class': 'form-control'
+                    }}) }}
+                </td>
+                <td>
+                    {{ form_errors(practitionerForm.prescriptionCoefficient) }}
+                    {{ form_widget(practitionerForm.prescriptionCoefficient, { 'attr':  {
+                        'class': 'form-control'
+                    }}) }}
+                </td>
+                <td>
+                    {{ form_row(practitionerForm.save, { 'attr':  {
+                'class': 'btn btn-primary'
+                    }}) }}
+                </td>
+            </tr>
+            {{ form_end(practitionerForm) }}
+        </tfoot>
+    </table>
+
 
 {% endblock %}

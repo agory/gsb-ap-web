@@ -42,6 +42,9 @@ $app->match('/practitioners/edit/{id}', "GSB\Controller\PractitionerController::
 // edit spe practitioners
 $app->match('/practitioners/edit/{id}/spe', "GSB\Controller\PractitionerController::gestSpePractitionerAction");
 
+// del spe practitioners
+$app->match('/practitioners/edit/{idPractitioner}/spe/{idSpecialite}/del', "GSB\Controller\PractitionerController::delSpePractitionerAction");
+
 // Login form
 $app->get('/login', "GSB\Controller\HomeController::loginAction")->bind('login');  // named route so that path('login') works in Twig templates
 
@@ -85,4 +88,10 @@ $app->get('/json/practitioners/{id}', "GSB\Controller\JsonController::practition
 
 // List of all practitioners
 $app->get('/json/practitioners/all/', "GSB\Controller\JsonController::practitionersAction");
+
+// List of all practitioner type
+$app->get('/json/practitioners/type/all/', "GSB\Controller\JsonController::practitionerTypesAction");
+
+// List of all practitioner type
+$app->match('/json/practitioners/set/', "GSB\Controller\JsonController::setPractitionerAction");
 
