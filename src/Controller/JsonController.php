@@ -11,12 +11,12 @@ class JsonController {
     public function setPractitionerAction(Request $request, Application $app) {
         $result = FALSE;
         if ($request->getContent()) {
-            $data = json_decode($request->getContent(), true);            
+            $data = json_decode($request->getContent(), true);
             $practitioner = $app['dao.practitioner']->convertJsonObject($data);
             //$app['monolog']->addInfo(var_export($practitioner, true));
             $app['dao.practitioner']->save($practitioner);
             $result = TRUE;
-        } 
+        }
         return $this->jsonResponse($result);
     }
 
@@ -38,6 +38,21 @@ class JsonController {
         ;
     }
 
+    
+    /* PMAZI */
+    // List
+    public function activityListAction(Application $app) {
+        $activities = $app['dao.activity']->findAll();
+        return $this->jsonResponse($activities);
+    }
+
+    // Detail
+    public function activityDetailAction($id, Request $request, Application $app) {
+        $activity = $app['dao.activity']->find($id);
+        return $this->jsonResponse($activity);
+    }
+
+    
     private function jsonResponse($data) {
         $response = new Response(json_encode($data, JSON_FORCE_OBJECT));
         $response->headers->set('Content-type', 'application/json');

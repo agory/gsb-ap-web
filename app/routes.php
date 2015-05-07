@@ -95,3 +95,15 @@ $app->get('/json/practitioners/type/all/', "GSB\Controller\JsonController::pract
 // List of all practitioner type
 $app->match('/json/practitioners/set/', "GSB\Controller\JsonController::setPractitionerAction");
 
+
+/* * * * * * * * * * *
+* 
+* Web Service - Pierre
+* 
+* * * * * * * * * * */
+
+// List of all activities
+$app->get('/json/activities/', "GSB\Controller\JsonController::activityListAction");
+
+// Detail for an activity
+$app->get('/json/activity/{id}', "GSB\Controller\JsonController::activityDetailAction");

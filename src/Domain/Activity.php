@@ -2,7 +2,7 @@
 
 namespace GSB\Domain;
 
-class Activity 
+class Activity implements \JsonSerializable
 {
     /**
      * Activity id.
@@ -85,5 +85,9 @@ class Activity
 
     public function setPurpose($purpose) {
         $this->purpose = $purpose;
+    }
+    
+    public function jsonSerialize() {
+        return get_object_vars($this);
     }
 }
