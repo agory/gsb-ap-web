@@ -51,7 +51,8 @@ class JsonController {
         $activity = $app['dao.activity']->find($id);
         return $this->jsonResponse($activity);
     }
-
+    
+    // TODO fonction add
     
     private function jsonResponse($data) {
         $response = new Response(json_encode($data, JSON_FORCE_OBJECT));
