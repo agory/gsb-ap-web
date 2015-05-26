@@ -55,8 +55,8 @@ class JsonController {
     // TODO fonction add
      public function setActivityAction(Request $request, Application $app) {
         $result = FALSE;
-        if ($request->getContent()) {
-            $data = json_decode($request->getContent(), true);
+        if ($request->getContent()) {            
+            $data = json_decode($request->getContent(), true);            
             $activity = $app['dao.activity']->convertJsonObject($data);
             $app['dao.activity']->save($activity);
             $result = TRUE;
