@@ -26,10 +26,14 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
             'pattern' => '^/login$',
             'anonymous' => true
         ),
+        'json' => array(
+            'pattern' => '^/json',
+            'anonymous' => true
+        ),
         'secured' => array(
             'pattern' => '^.*$',
             'logout' => true,
-            'anonymous' => true,
+            'anonymous' => false,
             'form' => array('login_path' => '/login', 'check_path' => '/login_check'),
             'users' => $app->share(function () use ($app) {
                 return new GSB\DAO\VisitorDAO($app['db']);
