@@ -107,3 +107,6 @@ $app->get('/json/activities/', "GSB\Controller\JsonController::activityListActio
 
 // Detail for an activity
 $app->get('/json/activity/{id}', "GSB\Controller\JsonController::activityDetailAction");
+
+// Add/Edit for an activity
+$app->match('/json/activity/', "GSB\Controller\JsonController::setActivityAction");

@@ -23,19 +23,19 @@ class JsonController {
     public function practitionerTypesAction(Request $request, Application $app) {
         $types = $app['dao.practitionertype']->findAll();
         return $this->jsonResponse($types);
-        ;
+        
     }
 
     public function practitionerAction($id, Request $request, Application $app) {
         $practitioner = $app['dao.practitioner']->find($id);
         return $this->jsonResponse($practitioner);
-        ;
+        
     }
 
     public function practitionersAction(Request $request, Application $app) {
         $practitioners = $app['dao.practitioner']->findAll();
         return $this->jsonResponse($practitioners);
-        ;
+        
     }
 
     
@@ -51,8 +51,19 @@ class JsonController {
         $activity = $app['dao.activity']->find($id);
         return $this->jsonResponse($activity);
     }
-    
+   
     // TODO fonction add
+     public function setActivityAction(Request $request, Application $app) {
+        $result = FALSE;
+        if ($request->getContent()) {
+            $data = json_decode($request->getContent(), true);
+            $activity = $app['dao.activity']->convertJsonObject($data);
+            $app['dao.activity']->save($activity);
+            $result = TRUE;
+        }
+        return $this->jsonResponse($result);
+    }
+
     
     private function jsonResponse($data) {
         $response = new Response(json_encode($data, JSON_FORCE_OBJECT));

@@ -61,6 +61,16 @@ class ActivityDAO extends DAO
         return $activity;
     }
     
+        public function convertJsonObject($data){
+        $activity = new Activity();
+        $activity->setId($data['id']);
+        $activity->setDate($data['date']['date']);
+        $activity->setPlace($data['place']);
+        $activity->setTheme($data['theme']);
+        $activity->setPurpose($data['purpose']);
+        return $activity;
+    }
+    
     /**
      * Saves an activity into the database.
      *
